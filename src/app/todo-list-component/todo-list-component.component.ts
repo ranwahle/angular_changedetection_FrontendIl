@@ -11,7 +11,7 @@ export class TodoListComponentComponent implements OnInit {
 
   tasks:Task[];
   cdState:string;
-  constructor(private cdRef:ChangeDetectorRef) {
+  constructor(private cdRef:ChangeDetectorRef = null) {
     this.tasks = [];
     this.cdState = 'started';
   }
@@ -38,6 +38,8 @@ export class TodoListComponentComponent implements OnInit {
     let taskIndex = this.tasks.indexOf(task);
     let newTask =  task.setIsEdited(true);//sEdited = false;
     this.tasks[taskIndex] = newTask;
+
+    this.cdRef.detectChanges();
   }
 
   ngOnInit() {
@@ -53,6 +55,8 @@ export class TodoListComponentComponent implements OnInit {
     let taskIndex = this.tasks.indexOf(task);
     let newTask =  task.setIsEdited(false);//sEdited = false;
     this.tasks[taskIndex] = newTask;
+
+    this.cdRef.detectChanges();
   }
 
   addTask(){
