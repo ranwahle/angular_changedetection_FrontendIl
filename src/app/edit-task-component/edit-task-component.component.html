@@ -1,0 +1,16 @@
+<div class="col-xs-1">
+  <input type="text" [value]="task.title" (change)="setTitle($event)"/>
+  </div>
+<div class="col-xs-1">
+ <input type="text" [(ngModel)]="task.description" (change)="setDescription($event)"/>
+
+  <!--<app-task-owner-component [owner]="task.owner"></app-task-owner-component>-->
+  </div>
+<div class="col-xs-2">
+  <app-edit-user-component [user]="task.owner"></app-edit-user-component>
+  <app-dropdown-component [items]="owners" [selectedItem]="task.owner"
+                          [defaultText]="'select owner'"
+                          (onSelectionChange)="ownerChanged($event)"
+                          [nameProperty]="'firstName'"></app-dropdown-component>
+</div>
+

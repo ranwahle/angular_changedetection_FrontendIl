@@ -1,0 +1,18 @@
+<p>
+ My todos for today
+</p>
+<button (click)="addTask({})">Add</button>
+
+<div class="row">
+  <div class="col-xs-1">Title</div>
+  <div class="col-xs-1">Description</div>
+  <div class="col-xs-2">Owner</div>
+</div>
+  <div class="row" *ngFor="let task of tasks; let index = index">
+    <app-task-component *ngIf="!task.isEdited" [task]="task"></app-task-component>
+    <app-edit-task-component [task]="task" *ngIf="task.isEdited"
+                             [taskIndex]="index" (taskChanged)="taskChanged($event)" ></app-edit-task-component>
+    <button (click)="editTask(task)" class="gglyphicon glyphicon-pencil" *ngIf="!task.isEdited"></button>
+    <button (click)="save(task)" class="glyphicon glyphicon-ok" *ngIf="task.isEdited"></button>
+  </div>
+
