@@ -1,0 +1,27 @@
+<div style="display: flex;"> <div style="float: left;"><label  [innerText]="label || ''"></label></div> <div class="dropdown" style="border-style:solid;border-width: 1px;float: left; border-radius: 5px; border-color: gray;" >
+  <a  href="javascript:void(0)" class="btn btn-default dropdown-toggle" [ngClass]="{disabled : disabled}" data-toggle="dropdown" (onkeypress)="buttonKeyPress($event)" (click)="toggleMenu(true)"
+      style="padding-top: 0px; border-color: transparent;">
+    <input type="text" [(ngModel)]="searchWord"  *ngIf="!hideSearchBox" [ngClass]="{shown : showMenu, hidden: !showMenu}" id="{{searchboxId}}"  autocomplete="off" />
+    <span [innerText]="defaultText" *ngIf="defaultText && !selectedItem"></span>
+    <span [innerText]="selectedItem[nameProperty] || selectedItem" *ngIf="selectedItem && (selectedItem[nameProperty] || !nameProperty)"></span>
+
+  </a>
+  <span class="caret" (click)="toggleMenu()">&nbsp;</span>
+
+  <ul class="dropdown-menu" role="menu" *ngIf="showMenu" style="display:inline-block;max-height: 400px; overflow: auto;">
+    <!-- | dorpdownFilter:searchWord:nameProperty-->
+    <li *ngIf="defaultText" role="presentation">
+      <a role="menuitem" href="javascript:void(0);" role="menuitem" (click)="itemSelected()" [innerText]="defaultText"></a>
+    </li>
+    <li role="presentation" *ngFor="let item of items  | dropdownFilter:searchWord:nameProperty
+    | showTop:topItems ">
+      <a role="menuitem" href="javascript:void(0);" role="menuitem" (click)="itemSelected(item)"
+         [innerText]="nameProperty ? item[nameProperty] : item"></a>
+    </li>
+    <li>
+      <a *ngIf="HasMore && showMenu && !searchWord" href="javascript:void(0);" (click)="showMore()">More...</a>
+    </li>
+  </ul>
+
+</div>
+</div>
