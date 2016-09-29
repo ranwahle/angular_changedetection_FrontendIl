@@ -56,7 +56,7 @@ export class TodoListComponentComponent implements OnInit {
     let newTask =  task.setIsEdited(false);//sEdited = false;
     this.tasks[taskIndex] = newTask;
 
-    this.cdRef.detectChanges();
+    //this.cdRef.detectChanges();
   }
 
   addTask(){
